@@ -1,0 +1,32 @@
+{
+  "name": "test",
+  "version": "0.0.1",
+  "description": "React Redux Test Project",
+  "main": "index.jsx",
+  "scripts": {
+    "start": "webpack-dev-server --env=dev --colors --progress",
+    "build:dev": "webpack --env=dev",
+    "build:prod": "webpack --env=prod",
+    "build:test": "webpack --env=test"
+  },
+  "author": "novli",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.18",
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.1",
+    "html-webpack-plugin": "^2.30.1",
+    "path": "^0.12.7",
+    "source-map-loader": "^0.2.3",
+    "uglifyjs-webpack-plugin": "^1.2.0",
+    "webpack": "^3.11.0",
+    "webpack-bundle-analyzer": "^2.10.0",
+    "webpack-config-utils": "^2.3.0",
+    "webpack-dev-server": "^2.11.1"
+  }
+}
