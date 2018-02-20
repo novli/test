@@ -1,0 +1,30 @@
+{
+  "env": {
+    "production": {
+      "plugins": [
+        "lodash",
+        ["module-resolver", {
+          "root": ["./src"],
+          "alias": {
+          }
+        }]
+      ],
+      "presets": [
+        ["airbnb", { "modules": false }]
+      ]
+    },
+    "development": {
+      "plugins": [
+        "lodash",
+        ["module-resolver", {
+          "root": ["./src"],
+          "alias": {
+          }
+        }]
+      ],
+      "presets": [
+        ["airbnb", { "modules": false }]
+      ]
+    }
+  }
+}

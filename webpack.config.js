@@ -60,6 +60,12 @@ module.exports = env => {
           test: /\.(js|jsx)$/,
           loaders: [
             {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: path.resolve(__dirname, 'cache/babel'),
+              },
+            },
+            {
               loader: 'eslint-loader',
               options: {
                 cache: path.resolve(__dirname, 'cache/eslint'),
