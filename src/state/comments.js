@@ -1,23 +1,83 @@
 import { createActions, handleActions } from 'redux-actions';
+import { normalize } from 'normalizr';
+
+import { commentsSchema } from 'schemas/comments';
+import { commentsGetPage } from './api';
 
 const initialState = {
-  world: 'world',
-  number: 0,
+  page: 0,
+  commentsList: [],
+  loading: false,
+  comments: {
+  },
 };
 
 export const {
-  comments: { countNumber },
+  comments: {
+    loadListWithFirstPage: loadListWithFirstPageThunk,
+    updateListWithNextPage: updateListWithNextPageThunk,
+  },
 } = createActions({
   COMMENTS: {
-    COUNT_NUMBER: number => number,
+    LOAD_LIST_WITH_FIRST_PAGE: async dispatch => {
+      const { value } = await dispatch(commentsGetPage(0));
+      const data = normalize(value.data, commentsSchema);
+      return {
+        data,
+      };
+    },
+    UPDATE_LIST_WITH_NEXT_PAGE: async (dispatch, page) => {
+      const nextPage = page + 1;
+      const { value } = await dispatch(commentsGetPage(nextPage));
+      const data = normalize(value.data, commentsSchema);
+      return {
+        data,
+        nextPage,
+      };
+    },
   },
 });
 
+export const loadListWithFirstPage = () => dispatch =>
+  dispatch(loadListWithFirstPageThunk(dispatch));
+
+export const updateListWithNextPage = page => dispatch =>
+  dispatch(updateListWithNextPageThunk(dispatch, page));
+
 export default handleActions({
-  [countNumber](state, { payload: number }) {
+  [`${loadListWithFirstPageThunk}_PENDING`](state) {
     return {
       ...state,
-      number: state.number + number,
+      loading: true,
+    };
+  },
+  [`${loadListWithFirstPageThunk}_FULFILLED`](state, { payload: { data } }) {
+    return {
+      ...state,
+      commentsList: data.result,
+      comments: {
+        ...state.comments,
+        ...data.entities.comments,
+      },
+      loading: false,
+    };
+  },
+  [`${updateListWithNextPageThunk}_PENDING`](state) {
+    return {
+      ...state,
+      loading: true,
+    };
+  },
+  [`${updateListWithNextPageThunk}_FULFILLED`](state, { payload: { data, nextPage: page } }) {
+    return {
+      ...state,
+      commentsList: [...state.commentsList, ...data.result],
+      comments: {
+        ...state.comments,
+        ...data.entities.comments,
+      },
+      page,
+      loading: false,
     };
   },
 }, initialState);

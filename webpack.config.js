@@ -17,8 +17,14 @@ module.exports = env => {
       hot: ifDev('react-hot-loader/patch'),
       app: './src/App.jsx',
       vendor: [
-        'react',
+        'axios',
+        'prop-types',
+        're-reselect',
         'react-dom',
+        'react',
+        'redux-promise-middleware',
+        'redux-thunk',
+        'reselect',
       ],
     }),
     output: {
