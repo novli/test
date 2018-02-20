@@ -3,7 +3,7 @@
 3. ~~webpack~~
 4. ~~babel~~
 5. ~~react~~
-6. hmr
+6. ~~hmr~~
 7. redux
 8. API
 9. normalizr

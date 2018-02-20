@@ -14,7 +14,12 @@ module.exports = env => {
   return removeEmpty({
     cache: true,
     entry: removeEmpty({
+      hot: ifDev('react-hot-loader/patch'),
       app: './src/App.jsx',
+      vendor: [
+        'react',
+        'react-dom',
+      ],
     }),
     output: {
       filename: ifDev('[name].js', '[name].min.js'),
