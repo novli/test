@@ -27,6 +27,20 @@
       "presets": [
         ["airbnb", { "modules": false }]
       ]
+    },
+    "test": {
+      "plugins": [
+        "react-hot-loader/babel",
+        "lodash",
+        ["module-resolver", {
+          "root": ["./src"],
+          "alias": {
+          }
+        }]
+      ],
+      "presets": [
+        ["airbnb"]
+      ]
     }
   }
 }

@@ -9,6 +9,6 @@
 9. ~~normalizr~~
 10. ~~reselect~~
 11. ~~recompose~~
-12. jest
+12. ~~jest~~
 
 ...immutable, postcss, css modules, stylelint, enzyme, web worker, ssr, react transition group

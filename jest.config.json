@@ -1,0 +1,18 @@
+{
+  "verbose": true,
+  "transform": {
+    "^.+\\.(js|jsx)$": "babel-jest"
+  },
+  "globals": {
+    "NODE_ENV": "test"
+  },
+  "moduleFileExtensions": [
+    "js",
+    "jsx"
+  ],
+  "moduleDirectories": [
+    "node_modules",
+    "src"
+  ],
+  "cacheDirectory": "cache/jest"
+}
