@@ -1,6 +1,6 @@
 1. ~~npm project~~
 2. ~~eslint~~
-3. webpack
+3. ~~webpack~~
 4. babel
 5. react
 6. hmr
