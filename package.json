@@ -1,0 +1,14 @@
+{
+  "name": "test",
+  "version": "0.0.1",
+  "description": "React Redux Test Project",
+  "main": "index.jsx",
+  "scripts": {
+  },
+  "author": "novli",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
