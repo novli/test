@@ -4,7 +4,7 @@
 4. ~~babel~~
 5. ~~react~~
 6. ~~hmr~~
-7. redux
+7. ~~redux~~
 8. API
 9. normalizr
 10. reselect
