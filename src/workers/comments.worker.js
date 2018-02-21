@@ -1,5 +1,4 @@
 import { normalize } from 'normalizr';
-
 import { commentsSchema } from 'schemas/comments';
 
 export const normalizeComments = data => {
