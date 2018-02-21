@@ -68,6 +68,12 @@ module.exports = env => {
     module: {
       rules: [
         {
+          test: /\.worker\.js$/,
+          loader: 'workerize-loader',
+          exclude: path.resolve(__dirname, 'node_modules'),
+          include: path.resolve(__dirname, 'src'),
+        },
+        {
           test: /\.(js|jsx)$/,
           loaders: [
             {

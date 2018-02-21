@@ -10,5 +10,6 @@
 10. ~~reselect~~
 11. ~~recompose~~
 12. ~~jest~~
+13. ~~web worker~~
 
-...immutable, postcss, css modules, stylelint, enzyme, web worker, ssr, react transition group
+...immutable, postcss, css modules, stylelint, enzyme, ssr, react transition group

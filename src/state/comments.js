@@ -1,8 +1,11 @@
 import { createActions, handleActions } from 'redux-actions';
 import { normalize } from 'normalizr';
 
+import CommentsWorker from 'workers/comments.worker';
 import { commentsSchema } from 'schemas/comments';
 import { commentsGetPage } from './api';
+
+const { normalizeComments } = new CommentsWorker();
 
 const initialState = {
   page: 0,
@@ -21,7 +24,7 @@ export const {
   COMMENTS: {
     LOAD_LIST_WITH_FIRST_PAGE: async dispatch => {
       const { value } = await dispatch(commentsGetPage(0));
-      const data = normalize(value.data, commentsSchema);
+      const data = await normalizeComments(value.data);
       return {
         data,
       };
