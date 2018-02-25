@@ -2,6 +2,19 @@
   "env": {
     "production": {
       "plugins": [
+        ["react-css-modules", {
+          "generateScopedName": "[md5:hash:base64]",
+          "webpackHotModuleReloading": true,
+          "filetypes": {
+            ".sss": {
+              "syntax": "sugarss",
+              "plugins": [
+                "postcss-import-sync2",
+                "postcss-nested"
+              ]
+            }
+          }
+        }],
         "lodash",
         ["module-resolver", {
           "root": ["./src"],
@@ -22,6 +35,7 @@
             ".sss": {
               "syntax": "sugarss",
               "plugins": [
+                "postcss-import-sync2",
                 "postcss-nested"
               ]
             }

@@ -108,24 +108,21 @@ module.exports = env => {
             fallback: {
               loader: 'style-loader',
               options: {
-                sourceMap: true,
+                sourceMap: ifDev(),
               },
             },
             use: [
               {
                 loader: 'css-loader',
                 options: {
-                  localIdentName: '[folder]__[local]__[md5:hash:base32]',
+                  localIdentName: ifNotDev('[md5:hash:base64]', '[folder]__[local]__[md5:hash:base32]'),
                   modules: true,
                   minimize: ifNotDev(),
-                  sourceMap: true,
+                  sourceMap: ifDev(),
                 },
               },
               {
                 loader: 'postcss-loader',
-                options: {
-                  sourceMap: true,
-                },
               },
             ],
           }),
