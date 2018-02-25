@@ -15,6 +15,18 @@
     },
     "development": {
       "plugins": [
+        ["react-css-modules", {
+          "generateScopedName": "[folder]__[local]__[md5:hash:base32]",
+          "webpackHotModuleReloading": true,
+          "filetypes": {
+            ".sss": {
+              "syntax": "sugarss",
+              "plugins": [
+                "postcss-nested"
+              ]
+            }
+          }
+        }],
         "react-hot-loader/babel",
         "lodash",
         ["module-resolver", {

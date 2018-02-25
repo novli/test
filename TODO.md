@@ -1,3 +1,4 @@
+# TODO
 1. ~~npm project~~
 2. ~~eslint~~
 3. ~~webpack~~
@@ -11,5 +12,8 @@
 11. ~~recompose~~
 12. ~~jest~~
 13. ~~web worker~~
+14. ~~postcss~~
+15. ~~css modules~~
 
-...immutable, postcss, css modules, stylelint, enzyme, ssr, react transition group
+## Other
+...~~immutable~~ (сильно все усложняет, лучше использовать jest и flow), stylelint, enzyme, ssr, react transition group, flow

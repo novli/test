@@ -6,11 +6,13 @@ const CleanPlugin = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = env => {
   const {
     ifDev, ifNotDev, ifTest,
   } = getIfUtils(env);
+  const extractTextFallback = config => [config.fallback, ...config.use];
   return removeEmpty({
     cache: true,
     entry: removeEmpty({
@@ -33,6 +35,7 @@ module.exports = env => {
     },
     plugins: removeEmpty([
       ifNotDev(new CleanPlugin(['dist'])),
+      ifNotDev(new ExtractTextPlugin('site.css')),
       ifDev(new HtmlPlugin({
         title: 'Test',
         template: 'src/htmlTemplate.html',
@@ -96,6 +99,36 @@ module.exports = env => {
           enforce: 'pre',
           test: /\.js$/,
           loader: 'source-map-loader',
+        },
+        {
+          test: /\.sss?$/,
+          exclude: path.resolve(__dirname, 'node_modules'),
+          include: path.resolve(__dirname, 'src'),
+          rules: ifNotDev(ExtractTextPlugin.extract, extractTextFallback)({
+            fallback: {
+              loader: 'style-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  localIdentName: '[folder]__[local]__[md5:hash:base32]',
+                  modules: true,
+                  minimize: ifNotDev(),
+                  sourceMap: true,
+                },
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: true,
+                },
+              },
+            ],
+          }),
         },
       ],
     },
