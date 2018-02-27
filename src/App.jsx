@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise-middleware';
@@ -20,19 +20,28 @@ const store = createStore(
 const element = document.getElementById('App');
 
 const renderApp = (App = Components) => {
-  ReactDOM.render(
-    <AppContainer>
+  if (process.env.NODE_ENV === 'development') {
+    ReactDOM.render(
+      <AppContainer>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </AppContainer>,
+      element,
+    );
+  } else {
+    ReactDOM.render(
       <Provider store={store}>
         <App />
-      </Provider>
-    </AppContainer>,
-    element,
-  );
+      </Provider>,
+      element,
+    );
+  }
 };
 
 renderApp();
 
-if (module.hot) {
+if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./Components', () => renderApp(Components));
   module.hot.accept('./state', () => store.replaceReducer(reducer));
 }
