@@ -1,80 +1,86 @@
-
-@import 'other.sss'
-
-#id
-  .class
-    color: red
-
 .block
+  &__absoluteElement
+    color: #ff0000
+
   &_element
-    color: red
+    color: #ff0000
 
-.block
-  &_element
-    ^&:first-child &
-      color: red
+    div&
+      color: #ff0000
 
-@define-mixin mixin $class, $color
-  .$(class)
-    color: $color
+    &:hover,
+    &.-modifier
+      color: #ff0000
 
-    @mixin-content
+    &.-modifier
+      color: #ff0000
 
-@mixin mixin class, red
-  background: blue
+    &:hover
+      color: #ff0000
 
-$class: class
-$color: red
+    &:matches(:first-child, .-modifier)
+      color: #ff0000
 
-.$(class)
-  color: $color
+    &:not(:first-child, .-modifier)
+      color: #ff0000
 
-$color: 1
-.class
-  $color: 2
-  @if $color == 1
-    color: red
+    & + &
+      color: #ff0000
 
-  @else if $color == 2
-    color: green
+    & + &.-modifier
+      color: #ff0000
 
-  @else
-    color: blue
+    &.-modifier + &:hover
+      color: #ff0000
 
-@each $color in red, green, blue
-  .class
-    color: $color
+    div > &
+      color: #ff0000
 
-@for $i from 1 to 3
-  .class$(i)
-    z-index: $i
+    .block > &
+      color: #ff0000
 
-@below 1024px
-  color: red
+    div.block > &
+      color: #ff0000
 
-.class
-  height: calc(10px * 3)
+    .block.-modifier > &
+      color: #ff0000
 
-.class
-  width: media(
-    1024px,
-    (max-width: 1024px) 100%
-  )
+    .block:matches(:first-child, .-modifier) > &
+      color: #ff0000
 
-.class
-  width: media(
-    1024px,
-    (width <= 1024px) 100%
-  )
+    .block:not(:first-child, .-modifier) > &
+      color: #ff0000
 
-.class
-  color: alpha(#fff, .5)
+    div^& > &
+      color: #ff0000
 
-.class:at-most(4)
-  color: red
+    ^&.-modifier > &
+      color: #ff0000
 
-.class:not(:first-child, :last-child)
-  color: red
-  
-.class:matches(:first-child, :last-child)
-  color: red
+    ^&:matches(:first-child, .-modifier) > &
+      color: #ff0000
+
+    ^&:not(:first-child, .-modifier) > &
+      color: #ff0000
+
+    &::before,
+    &::after
+      color: #ff0000
+
+    &::before
+      color: #ff0000
+
+    &::after
+      color: #ff0000
+
+    div
+      color: #ff0000
+
+    & > div
+      color: #ff0000
+
+  &Block
+    color: #ff0000
+
+    &_element
+      color: #ff0000

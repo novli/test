@@ -4,12 +4,17 @@
       "plugins": [
         ["react-css-modules", {
           "generateScopedName": "[md5:hash:base64]",
-          "webpackHotModuleReloading": true,
           "filetypes": {
             ".sss": {
               "syntax": "sugarss",
               "plugins": [
                 "postcss-import-sync2",
+                "postcss-each",
+                "postcss-for",
+                "postcss-mixins",
+                "postcss-simple-vars",
+                "postcss-conditionals",
+                "postcss-nested-selectors",
                 "postcss-nested"
               ]
             }
@@ -29,13 +34,19 @@
     "development": {
       "plugins": [
         ["react-css-modules", {
-          "generateScopedName": "[folder]__[local]__[md5:hash:base32]",
+          "generateScopedName": "[folder]___[local]___[md5:hash:base32]",
           "webpackHotModuleReloading": true,
           "filetypes": {
             ".sss": {
               "syntax": "sugarss",
               "plugins": [
                 "postcss-import-sync2",
+                "postcss-each",
+                "postcss-for",
+                "postcss-mixins",
+                "postcss-simple-vars",
+                "postcss-conditionals",
+                "postcss-nested-selectors",
                 "postcss-nested"
               ]
             }

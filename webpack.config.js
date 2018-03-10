@@ -115,7 +115,7 @@ module.exports = env => {
               {
                 loader: 'css-loader',
                 options: {
-                  localIdentName: ifNotDev('[md5:hash:base64]', '[folder]__[local]__[md5:hash:base32]'),
+                  localIdentName: ifNotDev('[md5:hash:base64]', '[folder]___[local]___[md5:hash:base32]'),
                   modules: true,
                   minimize: ifNotDev(),
                   sourceMap: ifDev(),

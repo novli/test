@@ -7,7 +7,7 @@ import promiseMiddleware from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
 
 import reducer from 'state';
-import Components from 'Components';
+import Page from 'Components';
 
 const store = createStore(
   reducer,
@@ -19,7 +19,7 @@ const store = createStore(
 
 const element = document.getElementById('App');
 
-const renderApp = (App = Components) => {
+const renderApp = (App = Page) => {
   if (process.env.NODE_ENV === 'development') {
     ReactDOM.render(
       <AppContainer>
@@ -42,6 +42,6 @@ const renderApp = (App = Components) => {
 renderApp();
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./Components', () => renderApp(Components));
+  module.hot.accept('./Components', () => renderApp(Page));
   module.hot.accept('./state', () => store.replaceReducer(reducer));
 }

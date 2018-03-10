@@ -1,0 +1,36 @@
+module.exports = {
+  'declaration-bang-space-after': 'never',
+  'declaration-bang-space-before': 'always',
+  'declaration-no-important': null,
+  'length-zero-no-unit': true,
+  'number-leading-zero': 'never',
+  'number-max-precision': 2,
+  'number-no-trailing-zeros': true,
+  'shorthand-property-no-redundant-values': true,
+  'string-no-newline': true,
+  'string-quotes': 'single',
+  'time-min-milliseconds': 100,
+  'unit-blacklist': null,
+  'unit-case': 'lower',
+  'unit-no-unknown': true,
+  'unit-whitelist': [
+    '%',
+    'deg',
+    'px',
+    's',
+  ],
+  'value-keyword-case': [
+    'lower',
+    {
+      ignoreProperties: [
+        '/\\$\\w+/',
+      ],
+    },
+  ],
+  'value-list-comma-newline-after': 'always-multi-line',
+  'value-list-comma-newline-before': 'never-multi-line',
+  'value-list-comma-space-after': 'always-single-line',
+  'value-list-comma-space-before': 'never',
+  'value-list-max-empty-lines': 0,
+  'value-no-vendor-prefix': true,
+};
