@@ -17,8 +17,8 @@ const initialState = {
 
 export const {
   comments: {
-    loadListWithFirstPage: loadListWithFirstPageThunk,
-    updateListWithNextPage: updateListWithNextPageThunk,
+    loadListWithFirstPage: loadListWithFirstPageAsync,
+    updateListWithNextPage: updateListWithNextPageAsync,
   },
 } = createActions({
   COMMENTS: {
@@ -42,19 +42,19 @@ export const {
 });
 
 export const loadListWithFirstPage = () => dispatch =>
-  dispatch(loadListWithFirstPageThunk(dispatch));
+  dispatch(loadListWithFirstPageAsync(dispatch));
 
 export const updateListWithNextPage = page => dispatch =>
-  dispatch(updateListWithNextPageThunk(dispatch, page));
+  dispatch(updateListWithNextPageAsync(dispatch, page));
 
 export default handleActions({
-  [`${loadListWithFirstPageThunk}_PENDING`](state) {
+  [`${loadListWithFirstPageAsync}_PENDING`](state) {
     return {
       ...state,
       loading: true,
     };
   },
-  [`${loadListWithFirstPageThunk}_FULFILLED`](state, { payload: { data } }) {
+  [`${loadListWithFirstPageAsync}_FULFILLED`](state, { payload: { data } }) {
     return {
       ...state,
       commentsList: data.result,
@@ -65,13 +65,13 @@ export default handleActions({
       loading: false,
     };
   },
-  [`${updateListWithNextPageThunk}_PENDING`](state) {
+  [`${updateListWithNextPageAsync}_PENDING`](state) {
     return {
       ...state,
       loading: true,
     };
   },
-  [`${updateListWithNextPageThunk}_FULFILLED`](state, { payload: { data, nextPage: page } }) {
+  [`${updateListWithNextPageAsync}_FULFILLED`](state, { payload: { data, nextPage: page } }) {
     return {
       ...state,
       commentsList: [...state.commentsList, ...data.result],

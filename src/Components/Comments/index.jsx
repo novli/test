@@ -8,6 +8,8 @@ import { loadListWithFirstPage, updateListWithNextPage } from 'state/comments';
 
 import Comment from './Comment';
 
+import './style.sss';
+
 const mapStateToProps = ({ comments: { page, commentsList, loading } }) => ({
   page,
   commentsList,
@@ -19,7 +21,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   loadNextPage: updateListWithNextPage,
 }, dispatch);
 
-const Comments = ({
+export const CommentsComponent = ({
   page,
   commentsList,
   loading,
@@ -44,12 +46,12 @@ const Comments = ({
         </tbody>
       </table>
       <div><strong>Page: {page + 1}</strong> <i>{loading ? 'loading' : null}</i></div>
-      <button onClick={() => loadNextPage(page)}>Load Next Page</button>
+      <button styleName="button" onClick={() => loadNextPage(page)}>Load Next Page</button>
     </Fragment>
   );
 };
 
-Comments.propTypes = {
+CommentsComponent.propTypes = {
   page: PropTypes.number.isRequired,
   commentsList: PropTypes.arrayOf(PropTypes.number).isRequired,
   loading: PropTypes.bool.isRequired,
@@ -64,4 +66,4 @@ export default compose(
       this.props.loadFirstPage();
     },
   }),
-)(Comments);
+)(CommentsComponent);

@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
 
 import reducer from 'state';
-import Components from 'Components';
+import Page from 'components/Page';
 
 const store = createStore(
   reducer,
@@ -17,31 +16,34 @@ const store = createStore(
   ),
 );
 
+const App = () => (
+  <Provider store={store}>
+    <Page />
+  </Provider>
+);
+
 const element = document.getElementById('App');
 
-const renderApp = (App = Components) => {
-  if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'production') {
+  ReactDOM.render(
+    <App />,
+    element,
+  );
+} else {
+  const { AppContainer } = require('react-hot-loader'); // eslint-disable-line import/no-extraneous-dependencies, global-require
+  const renderApp = (DevApp = App) => {
     ReactDOM.render(
       <AppContainer>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <DevApp />
       </AppContainer>,
       element,
     );
-  } else {
-    ReactDOM.render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-      element,
-    );
+  };
+  renderApp();
+
+  if (module.hot) {
+    module.hot.accept('./components/Page', () => renderApp(App));
+    module.hot.accept('./state', () => store.replaceReducer(reducer));
   }
-};
-
-renderApp();
-
-if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./Components', () => renderApp(Components));
-  module.hot.accept('./state', () => store.replaceReducer(reducer));
 }
+

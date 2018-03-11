@@ -14,6 +14,7 @@
 13. ~~web worker~~
 14. ~~postcss~~
 15. ~~css modules~~
+16. ~~stylelint~~
 
 ## Other
-...~~immutable~~ (сильно все усложняет, лучше использовать jest и flow), stylelint, enzyme, ssr, react transition group, flow
+...~~immutable~~ (сильно все усложняет, лучше использовать jest и flow), enzyme, ssr, react transition group, flow, jsdoc, redux-form

@@ -1,18 +1,28 @@
 {
-  "verbose": true,
-  "transform": {
-    "^.+\\.(js|jsx)$": "<rootDir>/__transformers__/babel-workerize.js"
-  },
+  "cacheDirectory": "cache/jest",
   "globals": {
-    "NODE_ENV": "test"
+    "BABEL_ENV": "test",
+    "NODE_ENV": "production"
   },
-  "moduleFileExtensions": [
-    "js",
-    "jsx"
-  ],
   "moduleDirectories": [
     "node_modules",
     "src"
   ],
-  "cacheDirectory": "cache/jest"
+  "moduleFileExtensions": [
+    "js",
+    "jsx"
+  ],
+  "moduleNameMapper": {
+    "^.+\\.(sss)$": "identity-obj-proxy"
+  },
+  "setupFiles": [
+    "./jest.setup.js"
+  ],
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ],
+  "transform": {
+    "^.+\\.(js|jsx)$": "<rootDir>/__transformers__/babel-workerize.js"
+  },
+  "verbose": true
 }

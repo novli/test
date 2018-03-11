@@ -1,10 +1,14 @@
 import React from 'react';
 
-import Comments from './Comments';
+import Comments from 'components/Comments';
 
-import './style.sss';
+import './other.sss';
 
-export default () => (
+/**
+ * React: Компонент страницы
+ * @return {ReactElement}
+ */
+const Page = () => (
   <div className="page">
     <div styleName="block">
       <div styleName="block_element">
@@ -14,3 +18,5 @@ export default () => (
     <Comments />
   </div>
 );
+
+export default Page;

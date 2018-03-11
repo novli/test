@@ -8,7 +8,11 @@ const mapStateToProps = ({ comments }, props) => ({
   ...dataSelector(comments, props),
 });
 
-const Comment = ({
+/**
+ * React: Компонент комментария
+ * @return {ReactElement}
+ */
+export const CommentComponent = ({
   id, name, body, email,
 }) => (
   <tr>
@@ -19,11 +23,11 @@ const Comment = ({
   </tr>
 );
 
-Comment.propTypes = {
+CommentComponent.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };
 
-export default connect(mapStateToProps)(Comment);
+export default connect(mapStateToProps)(CommentComponent);

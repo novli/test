@@ -1,22 +1,23 @@
 const color = require('color'); // eslint-disable-line import/no-extraneous-dependencies
+const path = require('path');
 
 module.exports = {
   parser: 'sugarss',
   plugins: {
     'postcss-import': {},
-    'postcss-mixins': {},
-    'postcss-each': {},
     'postcss-for': {},
+    'postcss-each': {},
+    'postcss-mixins': {},
     'postcss-simple-vars': {},
     'postcss-conditionals': {},
     'postcss-easy-media-query': {},
 
     'postcss-functions': {
       functions: {
-        darken: (value, percent) => color(value).darken(percent),
         alpha: (value, percent) => color(value).alpha(percent),
-        floor: value => Math.floor(value),
         ceil: value => Math.ceil(value),
+        darken: (value, percent) => color(value).darken(percent),
+        floor: value => Math.floor(value),
         round: value => Math.round(value),
       },
     },

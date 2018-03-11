@@ -14,7 +14,7 @@ module.exports = env => {
   } = getIfUtils(env);
   const extractTextFallback = config => [config.fallback, ...config.use];
   return removeEmpty({
-    cache: true,
+    cache: ifDev(),
     entry: removeEmpty({
       hot: ifDev('react-hot-loader/patch'),
       app: './src/App.jsx',
@@ -34,7 +34,7 @@ module.exports = env => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: removeEmpty([
-      ifNotDev(new CleanPlugin(['dist'])),
+      new CleanPlugin(['dist']),
       ifNotDev(new ExtractTextPlugin('site.css')),
       ifDev(new HtmlPlugin({
         title: 'Test',
@@ -115,7 +115,7 @@ module.exports = env => {
               {
                 loader: 'css-loader',
                 options: {
-                  localIdentName: ifNotDev('[md5:hash:base64]', '[folder]__[local]__[md5:hash:base32]'),
+                  localIdentName: ifNotDev('[md5:hash:base64]', '[folder]___[local]___[md5:hash:base32]'),
                   modules: true,
                   minimize: ifNotDev(),
                   sourceMap: ifDev(),

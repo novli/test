@@ -1,115 +1,299 @@
-# Styling
+# Стили
+Для описания стилей спользуется PostCSS с парсером SugarSS. Синтаксис и функционал близки к SASS, функционал расширен плагинами.
 ## PostCSS
-### Parser: postcss-sugarss
-```less
-#id
-  .class
-    color: red
+### Парсер SugarSS
+В синтаксисе отсутствуют ; и фигурные скобки, вложенность реализуется с помощью отступов.
+
+Пример:
+```sugarss
+.sugarSs
+  div
+    color: #ff0000
 ```
-### Plugins:
-#### postcss-import
-```less
-@import 'style.sss'
-```
+### Плагины
 #### postcss-nested
-```less
-.block
+```sugarss
+.withNesting
   &_element
-    color: red
+    color: #ff0000
 ```
 #### postcss-nested-selectors
-```less
-.block
+```sugarss
+.withNestedSelector
   &_element
-    ^&:first-child &
-      color: red
+    ^&.-modifier &
+      color: #ff0000
 ```
-#### postcss-mixins
-```less
-@define-mixin mixin $class, $color
-  .$(class)
-    color: $color
-
-    @mixin-content
-
-@mixin mixin class, red
-  background: blue
+#### postcss-import
+```sugarss
+@import 'style.sss'
 ```
 #### postcss-simple-vars
-```less
-$class: class
-$color: red
+```sugarss
+$g-color: #ff0000
+$g-name: variableBlockName
 
-.$(class)
-  color: $color
+.$(g-name)
+  color: $g-color
 ```
-#### postcss-conditionals
-```less
-$color: 1
+#### postcss-mixins
+```sugarss
+@define-mixin mixin $m-color: #ff0000, $m-font-size: 16px
+  color: $m-color
+  font-size: $m-font-size
 
-.class
-  @if $color == 1
-    color: red
-  @else if $color == 2
-    color: green
-  @else
-    color: blue
-```
-#### postcss-each
-```less
-@each $color in red, green, blue
-  .class
-    color: $color
+  @mixin-content
+
+.withMixin
+  @mixin mixin
+    background: $g-color
 ```
 #### postcss-for
-```less
-@for $i from 1 to 3
-  .class$(i)
-    z-index: $i
+```sugarss
+@for $f-index from 1 to 7 by 2
+  .withFor$(f-index)
+    z-index: $f-index
+```
+#### postcss-each
+```sugarss
+@each $e-name, $e-color in (Red, Green, Blue), (#ff0000, #00ff00, #0000ff)
+  .withEach$(e-name)
+    color: $e-color
+```
+#### postcss-conditionals
+```sugarss
+.withConditionals
+  $color: 'Red'
+
+  @if $color == 'Red'
+    color: #ff0000
+
+  @else if $color == 'Green'
+    color: #00ff00
+
+  @else
+    color: #0000ff
 ```
 #### postcss-easy-media-query
-```less
-@below 1024px
-  color: red
+```sugarss
+.withEasyQuery
+  @below 1024px
+    color: #ff0000
 ```
-#### postcss-math
-```less
-.class
-  height: math(10px * 3)
+#### postcss-calc
+```sugarss
+.withCalc
+  height: calc(10px * 3)
 ```
 #### postcss-media-fn
-```less
-.class
+```sugarss
+.withMedia
   width: media(
     1024px,
     (max-width: 1024px) 100%
   )
 ```
 #### postcss-media-minmax
-```less
-.class
+```sugarss
+.withMinMax
   width: media(
     1024px,
     (width <= 1024px) 100%
   )
 ```
 #### postcss-functions
-```less
-.class
-  color: alpha(#fff, .5)
+```sugarss
+.withFunction
+  color: alpha(#ffffff, .5)
 ```
 #### postcss-quantity-queries
-```less
-.class:at-most(4)
-  color: red
+```sugarss
+.withQuantity:at-most(4)
+  color: #ff0000
 ```
 #### postcss-selector-not
-```less
-.class:not(:first-child, :last-child)
-  color: red
+```sugarss
+.withNot:not(:first-child, :last-child)
+  color: #ff0000
 ```
 #### postcss-selector-matches
-```less
-.class:matches(:first-child, :last-child)
-  color: red
+```sugarss
+.withMatches:matches(:first-child, :last-child)
+  color: #ff0000
+```
+
+## Основные принципы
+**Принципы основаны на BEM с упрощением в пользу удобства написания классов и использования модификаторов. Строгие правила именования и сортировки нужны для улучшения сохранения и предсказуемости в тексте.**
+## Термины
+### Блок
+* Определяет собственные правила.
+* Может быть модифицирован типом или модификатором.
+* Может быть модифицирован блоком-предком, его типом или модификатором.
+
+Правило:
+```regexp
+.[a-z][a-z0-9]{1,11}([A-Z][a-z0-9]{1,11}){0,2}
+```
+Пример:
+```sugarss
+.withNothing
+  color: #ff0000
+
+  a&
+    color: #00ff00
+
+  &.-someColorModifier
+    color: #00ff00
+
+  .someAncestorBlock &
+    color: #00ff00
+
+  a.someAncestorBlock &
+    color: #00ff00
+
+  .someAncestorBlock.-someColorModifier &
+    color: #0000ff
+```
+### Модификатор
+* Определеляет правила изменения блока.
+* Может быть модифицирован типом или модификатором.
+* Может быть модифицирован блоком-предком, его типом или модификатором.
+
+Правило:
+```regexp
+.-{1,2}[a-z][a-z0-9]{1,11}([A-Z][a-z0-9]{1,11}){0,2}
+```
+Пример:
+```sugarss
+.withModifier
+  &.-someColorModifier
+    color: #ff0000
+
+    a&
+      color: #00ff00
+
+    &.-anotherColorModifier
+      color: #00ff00
+
+    .someAncestorBlock &
+      color: #00ff00
+
+    a.someAncestorBlock &
+      color: #00ff00
+
+    .someAncestorBlock.-someColorModifier &
+      color: #00ff00
+```
+### Элемент
+* Определеляет правила отображения контента и расположения блоков-потомков внутри блока.
+* Может быть модифицирован типом или модификатором блока.
+* Может быть модифицирован блоком-предком, его типом или модификатором.
+
+Правило:
+```regexp
+_{1,2}[a-z][a-z0-9]{1,11}([A-Z][a-z0-9]{1,11}){0,2}
+```
+Пример:
+```sugarss
+.withElements
+  &_elementForBlock
+    align-items: center
+
+    .someAncestorBlock &
+      color: #00ff00
+
+    a.someAncestorBlock &
+      color: #00ff00
+
+    .someAncestorBlock.-someColorModifier &
+      color: #00ff00
+```
+### Блок-потомок
+Является обычным блоком, наследующим имя предка.
+
+Правило:
+```regexp
+([A-Z][a-z0-9]{1,11}){0,2}
+```
+Пример:
+```sugarss
+.someBlock
+  color: #ff0000
+
+  &Successor
+    color: #00ff00
+
+    ^&.-someColorModifier &
+      color: #0000ff
+```
+
+## Композиция
+Интерфейс состоит из блоков. Блоки разделяются логически для определенных для них целей.
+
+Блок в разметке может иметь соответствующий компонент в React, иначе говоря, любой блок может быть вынесен в отдельный компонент, если это необходимо, и использован незавиимо в любом месте приложения.
+
+Блоки должны располагаться в отдельных элементах блоков-предков.
+
+Пример:
+```jsx
+<div className="card">
+  <div className="card_columns">
+    <div className="cardColumns">
+      <div className="cardColumns_item">
+        <div className="cardPicture">
+          <img className="cardPicture_img">
+        </div>
+      </div>
+      <div className="cardColumns_item">
+        <div className="cardColumn">
+          <div className="cardColumn_heading">
+            <div className="cardHeading">
+              <div className="cardHeading_content">Название</div>
+            </div>
+          </div>
+          <div className="cardColumn_text">
+            <div className="cardText">
+              <div className="cardText_content">Содержание</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+```sugarss
+.block
+  &_columns
+    padding: 0 20px
+
+  &Columns
+    flex-direction: row
+
+    &_item
+      width: 50%
+
+  &Column
+    align-items: center
+
+    &_heading
+      padding: 0 20px
+
+    &_text
+      margin: 20px 0 0
+      padding: 0 20px
+      width: 100%
+
+  &Heading
+    text-align: center
+
+    &_content
+      font-size: 24px
+
+  &Text
+    text-align: justify
+
+    &_content
+      font-size: 16px
+
 ```

@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components Comments component is rendered 1`] = `
+<React.Fragment>
+  <table>
+    <thead>
+      <tr>
+        <td>
+          id
+        </td>
+        <td>
+          name
+        </td>
+        <td>
+          body
+        </td>
+        <td>
+          email
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <Connect(CommentComponent)
+        id={1}
+        key="1"
+      />
+      <Connect(CommentComponent)
+        id={2}
+        key="2"
+      />
+      <Connect(CommentComponent)
+        id={3}
+        key="3"
+      />
+      <Connect(CommentComponent)
+        id={4}
+        key="4"
+      />
+      <Connect(CommentComponent)
+        id={5}
+        key="5"
+      />
+      <Connect(CommentComponent)
+        id={6}
+        key="6"
+      />
+      <Connect(CommentComponent)
+        id={7}
+        key="7"
+      />
+      <Connect(CommentComponent)
+        id={8}
+        key="8"
+      />
+      <Connect(CommentComponent)
+        id={9}
+        key="9"
+      />
+      <Connect(CommentComponent)
+        id={10}
+        key="10"
+      />
+    </tbody>
+  </table>
+  <div>
+    <strong>
+      Page: 
+      2
+    </strong>
+     
+    <i />
+  </div>
+  <button
+    className="button"
+    onClick={[Function]}
+  >
+    Load Next Page
+  </button>
+</React.Fragment>
+`;

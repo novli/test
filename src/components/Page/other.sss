@@ -1,0 +1,81 @@
+@import 'style.sss'
+
+.sugarSs
+  div
+    color: #ff0000
+
+$g-color: #ff0000
+$g-name: variableBlockName
+
+.$(g-name)
+  color: $g-color
+
+@define-mixin mixin $m-color: #ff0000, $m-font-size: 16px
+  color: $m-color
+  font-size: $m-font-size
+
+  @mixin-content
+
+.withMixin
+  @mixin mixin
+    background: $g-color
+
+@for $f-index from 1 to 7 by 2
+  .withFor$(f-index)
+    z-index: $f-index
+
+@each $e-name, $e-color in (Red, Green, Blue), (#ff0000, #00ff00, #0000ff)
+  .withEach$(e-name)
+    color: $e-color
+
+.withConditionals
+  $color: 'Red'
+
+  @if $color == 'Red'
+    color: #ff0000
+
+  @else if $color == 'Green'
+    color: #00ff00
+
+  @else
+    color: #0000ff
+
+.withEasyQuery
+  @below 1024px
+    color: #ff0000
+
+.withCalc
+  height: calc(10px * 3)
+
+.withMedia
+  width: media(
+    1024px,
+    (max-width: 1024px) 100%
+  )
+
+.withMinMax
+  width: media(
+    1024px,
+    (width <= 1024px) 100%
+  )
+
+.withFunction
+  color: alpha(#ffffff, .5)
+
+.withQuantity:at-most(4)
+  color: #ff0000
+
+.withNot:not(:first-child, :last-child)
+  color: #ff0000
+
+.withMatches:matches(:first-child, :last-child)
+  color: #ff0000
+
+.withNested
+  &_element
+    color: #ff0000
+
+.withNestedSelector
+  &_element
+    ^&.-modifier &
+      color: #ff0000

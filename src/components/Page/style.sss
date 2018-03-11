@@ -1,0 +1,86 @@
+.block
+  &__absoluteElement
+    color: #ff0000
+
+  &_element
+    color: #ff0000
+
+    div&
+      color: #ff0000
+
+    &:hover,
+    &.-modifier
+      color: #ff0000
+
+    &.-modifier
+      color: #ff0000
+
+    &:hover
+      color: #ff0000
+
+    &:matches(:first-child, .-modifier)
+      color: #ff0000
+
+    &:not(:first-child, .-modifier)
+      color: #ff0000
+
+    & + &
+      color: #ff0000
+
+    & + &.-modifier
+      color: #ff0000
+
+    &.-modifier + &:hover
+      color: #ff0000
+
+    div > &
+      color: #ff0000
+
+    .block > &
+      color: #ff0000
+
+    div.block > &
+      color: #ff0000
+
+    .block.-modifier > &
+      color: #ff0000
+
+    .block:matches(:first-child, .-modifier) > &
+      color: #ff0000
+
+    .block:not(:first-child, .-modifier) > &
+      color: #ff0000
+
+    div^& > &
+      color: #ff0000
+
+    ^&.-modifier > &
+      color: #ff0000
+
+    ^&:matches(:first-child, .-modifier) > &
+      color: #ff0000
+
+    ^&:not(:first-child, .-modifier) > &
+      color: #ff0000
+
+    &::before,
+    &::after
+      color: #ff0000
+
+    &::before
+      color: #ff0000
+
+    &::after
+      color: #ff0000
+
+    div
+      color: #ff0000
+
+    & > div
+      color: #ff0000
+
+  &Block
+    color: #ff0000
+
+    &_element
+      color: #ff0000
