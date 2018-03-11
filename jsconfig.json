@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "jsx": "react"
+    "jsx": "preserve"
   },
-  "target": "es2015",
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
   "include": [
     "src"
   ],
-  "exclude": [
-      "node_modules",
-      "dist"
-  ],
+  "target": "es6"
 }

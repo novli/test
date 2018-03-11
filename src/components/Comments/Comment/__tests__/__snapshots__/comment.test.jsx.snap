@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components Comment component is rendered 1`] = `
+<tr>
+  <td>
+    1
+  </td>
+  <td>
+    Name
+  </td>
+  <td>
+    Body
+  </td>
+  <td>
+    e@mail.ru
+  </td>
+</tr>
+`;

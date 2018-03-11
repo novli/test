@@ -31,10 +31,10 @@ if (process.env.NODE_ENV === 'production') {
   );
 } else {
   const { AppContainer } = require('react-hot-loader'); // eslint-disable-line import/no-extraneous-dependencies, global-require
-  const renderApp = (HotApp = App) => {
+  const renderApp = (DevApp = App) => {
     ReactDOM.render(
       <AppContainer>
-        <HotApp />
+        <DevApp />
       </AppContainer>,
       element,
     );

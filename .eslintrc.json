@@ -1,17 +1,26 @@
 {
-  "extends": "airbnb",
-  "rules": {
-      "arrow-body-style": ["error", "as-needed"],
-      "arrow-parens": ["error", "as-needed"],
-      "no-debugger": "warn"
-  },
-  "env": {
-      "browser": true,
-      "jest": true
-  },
-  "settings": {
-      "import/resolver": {
-          "babel-module": {}
-      }
-  }
+    "env": {
+        "browser": true,
+        "jest": true
+    },
+    "extends": [
+        "airbnb",
+        "jest-enzyme"
+    ],
+    "rules": {
+        "arrow-body-style": [
+            "error",
+            "as-needed"
+        ],
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ],
+        "no-debugger": "warn"
+    },
+    "settings": {
+        "import/resolver": {
+            "babel-module": {}
+        }
+    }
 }

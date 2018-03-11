@@ -66,6 +66,24 @@
     },
     "test": {
       "plugins": [
+        ["react-css-modules", {
+          "generateScopedName": "[local]",
+          "filetypes": {
+            ".sss": {
+              "syntax": "sugarss",
+              "plugins": [
+                "postcss-import-sync2",
+                "postcss-each",
+                "postcss-for",
+                "postcss-mixins",
+                "postcss-simple-vars",
+                "postcss-conditionals",
+                "postcss-nested-selectors",
+                "postcss-nested"
+              ]
+            }
+          }
+        }],
         "lodash",
         ["module-resolver", {
           "root": ["./src"],
